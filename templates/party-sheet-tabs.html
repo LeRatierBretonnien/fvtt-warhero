@@ -1,0 +1,12 @@
+<nav class="sheet-tabs tabs" data-group="primary">
+  {{#each tabs}}
+  <a
+    class="item{{#if active}} active{{/if}}"
+    data-tab="{{id}}"
+    data-group="{{group}}"
+  >
+    <i class="{{icon}}"></i>
+    {{localize label}}
+  </a>
+  {{/each}}
+</nav>

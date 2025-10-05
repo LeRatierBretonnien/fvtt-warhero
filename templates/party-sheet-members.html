@@ -1,0 +1,136 @@
+<div class="tab members{{#each tabs}}{{#if (eq id "members")}}{{#if active}} active{{/if}}{{/if}}{{/each}}" data-group="primary" data-tab="members">
+  <div class="members-container">
+    <!-- Add Member Section -->
+    {{#if isOwner}}
+    <div class="members-section add-member-section">
+      <h3>{{localize "WH.ui.addMember"}}</h3>
+      <div class="add-member-controls">
+        {{#if availableActors}}
+        <select class="available-actors">
+          <option value="">{{localize "WH.ui.selectCharacter"}}</option>
+          {{#each availableActors}}
+          <option value="{{id}}">{{name}}</option>
+          {{/each}}
+        </select>
+        <button type="button" class="add-member-btn" data-action="add-member">
+          <i class="fas fa-plus"></i> {{localize "WH.ui.addToParty"}}
+        </button>
+        {{else}}
+        <p class="no-available">{{localize "WH.ui.noAvailableCharacters"}}</p>
+        {{/if}}
+      </div>
+    </div>
+    {{/if}}
+
+    <!-- Party Members List -->
+    {{#if members}}
+    <div class="members-section party-members-section">
+      <h3>{{localize "WH.ui.partyMembers"}}</h3>
+      <div class="members-list">
+        {{#each members}}
+        <div class="member-item" data-member-id="{{id}}">
+          <div class="member-portrait">
+            <img src="{{img}}" alt="{{name}}" data-action="show-member-image" data-member-id="{{id}}" title="Show Character Portrait"/>
+          </div>
+
+          <div class="member-info">
+            <div class="member-header">
+              <h4 class="member-name">{{name}}</h4>
+              <div class="member-level">{{localize "WH.ui.level"}} {{level}}</div>
+            </div>
+
+            <div class="member-details">
+              <div class="member-race-class">
+                {{race}} {{#if classes}}| {{classes}}{{/if}}
+              </div>
+
+              <div class="member-resources">
+                <div class="resource-bar hp-bar">
+                  <label>{{localize "WH.ui.hp"}}</label>
+                  <div class="bar">
+                    <div class="bar-fill" data-percentage="{{math hp.value '/' hp.max '*' 100}}"></div>
+                  </div>
+                  <span class="resource-text">{{hp.value}}/{{hp.max}}</span>
+                </div>
+
+                {{#if mana.max}}
+                <div class="resource-bar mana-bar">
+                  <label>{{localize "WH.ui.mana"}}</label>
+                  <div class="bar">
+                    <div class="bar-fill mana" data-percentage="{{math mana.value '/' mana.max '*' 100}}"></div>
+                  </div>
+                  <span class="resource-text">{{mana.value}}/{{mana.max}}</span>
+                </div>
+                {{/if}}
+              </div>
+
+              {{#if conditions}}
+              <div class="member-conditions">
+                {{#each conditions}}
+                <span class="condition {{severity}}" title="{{name}}">
+                  <i class="{{icon}}"></i>
+                </span>
+                {{/each}}
+              </div>
+              {{/if}}
+            </div>
+          </div>
+
+          <div class="member-actions">
+            {{#if canEdit}}
+              <button type="button" class="member-edit" data-action="edit-member" data-member-id="{{id}}" title="Edit Character">
+                <i class="fas fa-edit"></i>
+              </button>
+            {{/if}}
+
+            {{#if ../isOwner}}
+              <button type="button" class="member-remove" data-action="remove-member" data-member-id="{{id}}" title="Remove from Party">
+                <i class="fas fa-times"></i>
+              </button>
+            {{/if}}
+          </div>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+    {{else}}
+    <div class="members-section empty-party">
+      <div class="empty-message">
+        <i class="fas fa-users fa-3x"></i>
+        <h3>{{localize "WH.ui.emptyParty"}}</h3>
+        <p>{{localize "WH.ui.emptyPartyHelp"}}</p>
+      </div>
+    </div>
+    {{/if}}
+
+    <!-- Party Management Actions -->
+    {{#if isOwner}}
+    {{#if members}}
+    <div class="members-section party-actions-section">
+      <h3>{{localize "WH.ui.partyActions"}}</h3>
+      <div class="party-actions">
+        <button type="button" class="party-action-btn" data-action="manage-party" data-action-type="heal-all">
+          <i class="fas fa-heart"></i> {{localize "WH.ui.healAll"}}
+        </button>
+
+        <button type="button" class="party-action-btn" data-action="manage-party" data-action-type="restore-mana">
+          <i class="fas fa-magic"></i> {{localize "WH.ui.restoreAllMana"}}
+        </button>
+
+        <button type="button" class="party-action-btn" data-action="manage-party" data-action-type="full-restore">
+          <i class="fas fa-refresh"></i> {{localize "WH.ui.fullRestore"}}
+        </button>
+
+        <button type="button" class="party-action-btn" data-action="roll-party-skill" data-skill="perception">
+          <i class="fas fa-eye"></i> {{localize "WH.ui.partyPerception"}}
+        </button>
+
+        <button type="button" class="party-action-btn" data-action="roll-party-skill" data-skill="stealth">
+          <i class="fas fa-user-secret"></i> {{localize "WH.ui.partyStealth"}}
+        </button>
+      </div>
+    </div>
+    {{/if}}
+    {{/if}}
+  </div>
+</div>

@@ -1,0 +1,201 @@
+<div class="tab inventory{{#each tabs}}{{#if (eq id "inventory")}}{{#if active}} active{{/if}}{{/if}}{{/each}}" data-group="primary" data-tab="inventory">
+  <div class="inventory-container">
+    <!-- Inventory Summary -->
+    <div class="inventory-section summary-section">
+      <h3>{{localize "WH.ui.inventorySummary"}}</h3>
+      <div class="inventory-summary">
+        <div class="summary-stat">
+          <label>{{localize "WH.ui.totalWealth"}}</label>
+          <span class="value">{{inventory.totalValue}}</span>
+        </div>
+        <div class="summary-stat">
+          <label>{{localize "WH.ui.totalItems"}}</label>
+          <span class="value">{{math inventory.equipment.length '+' inventory.weapons.length '+' inventory.armors.length '+' inventory.other.length}}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Money -->
+    {{#if inventory.money}}
+    <div class="inventory-section money-section">
+      <h3>{{localize "WH.ui.partyTreasury"}}</h3>
+      <div class="money-list">
+        {{#each inventory.money}}
+        <div class="money-item" data-item-id="{{_id}}">
+          <img src="{{img}}" alt="{{name}}" class="money-icon"/>
+          <div class="money-details">
+            <span class="money-name">{{name}}</span>
+            <span class="money-quantity">{{system.quantity}}</span>
+          </div>
+          {{#if ../isOwner}}
+          <div class="money-actions">
+            <button type="button" class="item-edit" data-action="edit-item">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button type="button" class="item-delete" data-action="delete-item">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+          {{/if}}
+        </div>
+        {{/each}}
+      </div>
+    </div>
+    {{/if}}
+
+    <!-- Equipment -->
+    {{#if inventory.equipment}}
+    <div class="inventory-section equipment-section">
+      <h3>{{localize "WH.ui.equipment"}}</h3>
+      <div class="equipment-list">
+        {{#each inventory.equipment}}
+        <div class="equipment-item" data-item-id="{{_id}}">
+          <img src="{{img}}" alt="{{name}}" class="equipment-icon"/>
+          <div class="equipment-details">
+            <div class="equipment-name">{{name}}</div>
+            <div class="equipment-stats">
+              {{#if system.quantity}}{{localize "WH.ui.quantity"}}: {{system.quantity}} | {{/if}}
+              {{#if system.weight}}{{localize "WH.ui.weight"}}: {{system.weight}} | {{/if}}
+              {{#if system.cost}}{{localize "WH.ui.value"}}: {{system.cost}}{{/if}}
+            </div>
+          </div>
+          {{#if ../isOwner}}
+          <div class="equipment-actions">
+            <button type="button" class="item-edit" data-action="edit-item">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button type="button" class="item-delete" data-action="delete-item">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+          {{/if}}
+        </div>
+        {{/each}}
+      </div>
+    </div>
+    {{/if}}
+
+    <!-- Weapons -->
+    {{#if inventory.weapons}}
+    <div class="inventory-section weapons-section">
+      <h3>{{localize "WH.ui.weapons"}}</h3>
+      <div class="weapons-list">
+        {{#each inventory.weapons}}
+        <div class="weapon-item" data-item-id="{{_id}}">
+          <img src="{{img}}" alt="{{name}}" class="weapon-icon"/>
+          <div class="weapon-details">
+            <div class="weapon-name">{{name}}</div>
+            <div class="weapon-stats">
+              {{localize "WH.ui.damage"}}: {{system.damage}} |
+              {{localize "WH.ui.reach"}}: {{system.reach}} |
+              {{localize "WH.ui.value"}}: {{system.cost}}
+            </div>
+          </div>
+          {{#if ../isOwner}}
+          <div class="weapon-actions">
+            <button type="button" class="item-edit" data-action="edit-item">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button type="button" class="item-delete" data-action="delete-item">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+          {{/if}}
+        </div>
+        {{/each}}
+      </div>
+    </div>
+    {{/if}}
+
+    <!-- Armors -->
+    {{#if inventory.armors}}
+    <div class="inventory-section armors-section">
+      <h3>{{localize "WH.ui.armors"}}</h3>
+      <div class="armors-list">
+        {{#each inventory.armors}}
+        <div class="armor-item" data-item-id="{{_id}}">
+          <img src="{{img}}" alt="{{name}}" class="armor-icon"/>
+          <div class="armor-details">
+            <div class="armor-name">{{name}}</div>
+            <div class="armor-stats">
+              {{localize "WH.ui.dr"}}: {{system.dr}} |
+              {{localize "WH.ui.dexPenalty"}}: {{system.dexpenalty}} |
+              {{localize "WH.ui.value"}}: {{system.cost}}
+            </div>
+          </div>
+          {{#if ../isOwner}}
+          <div class="armor-actions">
+            <button type="button" class="item-edit" data-action="edit-item">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button type="button" class="item-delete" data-action="delete-item">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+          {{/if}}
+        </div>
+        {{/each}}
+      </div>
+    </div>
+    {{/if}}
+
+    <!-- Other Items -->
+    {{#if inventory.other}}
+    <div class="inventory-section other-section">
+      <h3>{{localize "WH.ui.otherItems"}}</h3>
+      <div class="other-list">
+        {{#each inventory.other}}
+        <div class="other-item" data-item-id="{{_id}}">
+          <img src="{{img}}" alt="{{name}}" class="other-icon"/>
+          <div class="other-details">
+            <div class="other-name">{{name}}</div>
+            <div class="other-type">{{localize (concat "TYPES.Item." type)}}</div>
+          </div>
+          {{#if ../isOwner}}
+          <div class="other-actions">
+            <button type="button" class="item-edit" data-action="edit-item">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button type="button" class="item-delete" data-action="delete-item">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+          {{/if}}
+        </div>
+        {{/each}}
+      </div>
+    </div>
+    {{/if}}
+
+    <!-- Add Items -->
+    {{#if isOwner}}
+    <div class="inventory-section add-items-section">
+      <h3>{{localize "WH.ui.addItems"}}</h3>
+      <div class="add-items">
+        <button type="button" class="add-item" data-action="add-item" data-item-type="equipment">
+          <i class="fas fa-plus"></i> {{localize "WH.ui.addEquipment"}}
+        </button>
+        <button type="button" class="add-item" data-action="add-item" data-item-type="weapon">
+          <i class="fas fa-plus"></i> {{localize "WH.ui.addWeapon"}}
+        </button>
+        <button type="button" class="add-item" data-action="add-item" data-item-type="armor">
+          <i class="fas fa-plus"></i> {{localize "WH.ui.addArmor"}}
+        </button>
+        <button type="button" class="add-item" data-action="add-item" data-item-type="money">
+          <i class="fas fa-plus"></i> {{localize "WH.ui.addMoney"}}
+        </button>
+      </div>
+    </div>
+    {{/if}}
+
+    <!-- Drop Zone -->
+    {{#if isOwner}}
+    <div class="inventory-section drop-zone">
+      <div class="drop-area">
+        <i class="fas fa-download fa-2x"></i>
+        <p>{{localize "WH.ui.dropItemsHere"}}</p>
+      </div>
+    </div>
+    {{/if}}
+  </div>
+</div>
