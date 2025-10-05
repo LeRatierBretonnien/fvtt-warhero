@@ -1,10 +1,10 @@
-<form class="{{cssClass}}" autocomplete="off">
+<section class="{{cssClass}}" autocomplete="off">
   <header class="sheet-header">
       <img class="item-sheet-img" src="{{img}}" data-edit="img" title="{{name}}"/>
       <div class="header-fields">
           <h1 class="charname"><input name="name" type="text" value="{{name}}" placeholder="Name"/></h1>
       </div>
-  </header>
+</section>
 
   {{> systems/fvtt-warhero/templates/partial-item-nav.html}}
 
@@ -19,7 +19,7 @@
         <li class="flexrow"><label class="item-field-label-medium ">{{localize "WH.ui.providedslot"}}</label>
           <input type="text" class="item-field-label-medium " name="system.providedslot" value="{{system.providedslot}}" data-dtype="Number"/>
         </li>
-        
+
         {{> systems/fvtt-warhero/templates/partial-item-common-equipment.html}}
 
       </ul>

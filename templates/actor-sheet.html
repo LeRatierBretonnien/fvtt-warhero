@@ -12,9 +12,9 @@
             <div class="ability-item">
               <ul>
                 {{#each system.statistics as |stat key|}}
-                {{> systems/fvtt-warhero/templates/partial-actor-stat-block.html stat=stat key=key path="statistics" fieldClass="item-field-label-medium"}}
+                {{> systems/fvtt-warhero/templates/actors/partial-actor-stat-block.html stat=stat key=key path="statistics" fieldClass="item-field-label-medium"}}
                 {{/each}}
-              </ul>            
+              </ul>
             </div>
 
             <div class="ability-item">
@@ -26,11 +26,11 @@
                   <input type="text" class="item-field-label-medium" disabled value="{{race.name}}" data-dtype="String" />
                   <div class="item-controls item-controls-fixed">
                     <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                  </div>  
+                  </div>
                   {{else}}
                     <a class="item-edit"><img class="sheet-competence-img" src="systems/fvtt-warhero/images/icons/dwarf-face.svg"></a>
                   {{/if}}
-                </li>  
+                </li>
                 <li class="item flexrow list-item " data-item-id="{{mainClass._id}}">
                   <label class="item-field-label-medium">{{localize "WH.ui.class"}}</label>
                   {{#if mainClass}}
@@ -42,7 +42,7 @@
                   {{else}}
                     <a class="item-edit"><img class="sheet-competence-img" src="systems/fvtt-warhero/images/icons/elf-helmet.svg"></a>
                   {{/if}}
-                </li>  
+                </li>
                 <li class="item flexrow list-item " data-item-id="{{secondaryClass._id}}">
                   <label class="item-field-label-medium">{{localize "WH.ui.secondaryclass"}}</label>
                   {{#if secondaryClass}}
@@ -50,11 +50,11 @@
                   <input type="text" class="item-field-label-medium" disabled value="{{secondaryClass.name}}" data-dtype="String" />
                   <div class="item-controls item-controls-fixed">
                     <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                  </div>  
+                  </div>
                   {{else}}
                     <a class="item-edit"><img class="sheet-competence-img" src="systems/fvtt-warhero/images/icons/elf-helmet.svg"></a>
                   {{/if}}
-                </li>  
+                </li>
                 <li class="item flexrow list-item" >
                   <label class="item-field-label-medium">{{localize "WH.ui.religion"}}</label>
                   <input type="text" class="item-field-label-medium" name="system.biodata.religion" value="{{system.biodata.religion}}" data-dtype="String" />
@@ -62,25 +62,25 @@
                   <label class="item-field-label-short">{{localize "WH.ui.size"}}</label>
                   <select class="item-field-label-short" type="text" name="system.biodata.size" value="{{system.biodata.size}}" data-dtype="String">
                     {{selectOptions config.sizeOptions selected=system.biodata.size localize=true}}
-                  </select>       
-                </li>  
+                  </select>
+                </li>
               </ul>
-            </div>      
+            </div>
           </div>
 
           <div class="flexrow">
-              {{#each system.attributes as |attr key|}}              
+              {{#each system.attributes as |attr key|}}
                 {{#if attr.isheader}}
                   <div class="flexrow">
                   {{> systems/fvtt-warhero/templates/partial-actor-stat-block.html stat=attr key=key path="attributes" fieldClass="item-field-label-medium"}}
                   </div>
                 {{/if}}
-              {{/each}}    
+              {{/each}}
             </ul>
           </div>
 
           </div>
-          
+
         </div>
       </div>
 
@@ -102,7 +102,7 @@
 
     {{!-- Main Tab --}}
     <div class="tab main" data-group="primary" data-tab="main">
-      
+
       <div class="flexrow">
 
         <div class="ability-item">
@@ -115,7 +115,7 @@
             {{/if}}
             {{/each}}
           </ul>
-  
+
         </div>
 
         <div class="ability-item">
@@ -150,7 +150,7 @@
                 <a class="item-edit item-name-img" title="Edit Item"><img class="sheet-competence-img"
                     src="{{language.img}}" /></a>
                 <span class="item-name-label-long">{{language.name}}</span>
-  
+
                 <div class="item-filler">&nbsp;</div>
                 <div class="item-controls item-controls-fixed">
                   <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
@@ -168,7 +168,7 @@
 
     {{!-- Combat Tab --}}
     <div class="tab combat" data-group="primary" data-tab="combat">
-      
+
       <div class="flexcol">
 
         <div class="grid grid2col">
@@ -195,7 +195,7 @@
             {{/with}}
             {{#with system.secondary.rangeddamagebonus as |stat|}}
             {{> systems/fvtt-warhero/templates/partial-actor-stat-block.html stat=stat key="rangeddamagebonus" path="secondary" fieldClass="item-field-label-vlong"}}
-            {{/with}}           
+            {{/with}}
           </ul>
         </div>
 
@@ -219,7 +219,7 @@
               <span class="item-name-label-long"><a class="roll-weapon"><i class="fa-solid fa-dice-d20"></i>{{weapon.name}}</a></span>
 
               <span class="item-field-label-medium">{{localize (concat "WH.conf." weapon.system.weapontype)}}</span>
-              
+
               {{#if (eq system.weapontype "special")}}
               <span class="item-field-label-medium"><a class="roll-damage"><i class="fa-solid fa-dice-d20"></i>{{weapon.system.damageformula}}</a></span>
               {{else}}
@@ -283,7 +283,7 @@
             {{/each}}
           </ul>
         </div>
-        
+
         <div class="grid grid2col">
           <ul class="stat-list alternate-list">
             {{#with system.secondary.drbonus as |stat|}}
@@ -399,7 +399,7 @@
               <a class="item-edit item-name-img" title="Edit Item"><img class="sheet-competence-img"
                   src="{{skill.img}}" /></a>
               <span class="item-name-label-long">{{skill.name}}</a></span>
-              
+
               {{#if skill.system.unlimited}}
               <span class="item-field-label-medium">N/A</span>
               <span class="item-field-label-medium">N/A</span>
@@ -437,7 +437,7 @@
               <a class="item-edit item-name-img" title="Edit Item"><img class="sheet-competence-img"
                   src="{{skill.img}}" /></a>
               <span class="item-name-label-long">{{skill.name}}</a></span>
-              
+
               {{#if skill.system.unlimited}}
               <span class="item-field-label-medium">N/A</span>
               <span class="item-field-label-medium">N/A</span>
@@ -529,7 +529,7 @@
     <div class="tab power" data-group="primary" data-tab="power">
 
       <div class="flexcol">
-        
+
         {{#each powers as |school schoolKey|}}
         <ul class="stat-list alternate-list">
           <li class="item flexrow list-item items-title-bg">
@@ -551,7 +551,7 @@
               <div class="item-filler">&nbsp;</div>
               <div class="item-controls item-controls-fixed">
                 <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-              </div>  
+              </div>
             </li>
             {{/each}}
 
@@ -662,7 +662,7 @@
             <span class="item-name-label-long">{{item.name}}</span>
 
             <span class="item-field-label-medium">{{upperFirst item.type}}</span>
-            
+
             <div class="item-filler">&nbsp;</div>
             <div class="item-controls item-controls-fixed">
               <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>

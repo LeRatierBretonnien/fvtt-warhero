@@ -10,7 +10,7 @@ export class WarheroActorSheet extends ActorSheet {
 
   /** @override */
   static get defaultOptions() {
-    
+
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["fvtt-warhero", "sheet", "actor"],
       template: "systems/fvtt-warhero/templates/actor-sheet.html",
@@ -42,18 +42,18 @@ export class WarheroActorSheet extends ActorSheet {
       cssClass: this.isEditable ? "editable" : "locked",
       system: objectData,
       limited: this.object.limited,
-      compentencyItems:this.actor.getCompetencyItems( ), 
-      skills: this.actor.getNormalSkills( ),
-      raceSkills: this.actor.getRaceSkills( ),
-      classSkills: this.actor.getClassSkills( ),
-      languages: this.actor.getLanguages( ),
-      weapons: this.actor.checkAndPrepareEquipments( foundry.utils.duplicate(this.actor.getWeapons()) ),
-      conditions: this.actor.checkAndPrepareEquipments( foundry.utils.duplicate(this.actor.getConditions()) ),
-      armors: this.actor.checkAndPrepareEquipments( foundry.utils.duplicate(this.actor.getArmors())),
-      shields: this.actor.checkAndPrepareEquipments( foundry.utils.duplicate(this.actor.getShields())),
-      equippedWeapons: this.actor.checkAndPrepareEquipments( foundry.utils.duplicate(this.actor.getEquippedWeapons())),
-      equippedArmors: this.actor.checkAndPrepareEquipments( foundry.utils.duplicate(this.actor.getEquippedArmors())),
-      equippedShields: this.actor.checkAndPrepareEquipments( foundry.utils.duplicate(this.actor.getEquippedShields())),
+      compentencyItems: this.actor.getCompetencyItems(),
+      skills: this.actor.getNormalSkills(),
+      raceSkills: this.actor.getRaceSkills(),
+      classSkills: this.actor.getClassSkills(),
+      languages: this.actor.getLanguages(),
+      weapons: this.actor.checkAndPrepareEquipments(foundry.utils.duplicate(this.actor.getWeapons())),
+      conditions: this.actor.checkAndPrepareEquipments(foundry.utils.duplicate(this.actor.getConditions())),
+      armors: this.actor.checkAndPrepareEquipments(foundry.utils.duplicate(this.actor.getArmors())),
+      shields: this.actor.checkAndPrepareEquipments(foundry.utils.duplicate(this.actor.getShields())),
+      equippedWeapons: this.actor.checkAndPrepareEquipments(foundry.utils.duplicate(this.actor.getEquippedWeapons())),
+      equippedArmors: this.actor.checkAndPrepareEquipments(foundry.utils.duplicate(this.actor.getEquippedArmors())),
+      equippedShields: this.actor.checkAndPrepareEquipments(foundry.utils.duplicate(this.actor.getEquippedShields())),
       powers: this.actor.sortPowers(),
       allItems: this.actor.getAllItems(),
       subActors: foundry.utils.duplicate(this.actor.getSubActors()),
@@ -64,14 +64,14 @@ export class WarheroActorSheet extends ActorSheet {
       totalMoney: this.actor.computeTotalMoney(),
       equipments: foundry.utils.duplicate(this.actor.getEquipmentsOnly()),
       //moneys: foundry.utils.duplicate(this.actor.getMoneys()),
-      description: await TextEditor.enrichHTML(this.object.system.biodata.description, {async: true}),
-      notes: await TextEditor.enrichHTML(this.object.system.biodata.notes, {async: true}),
+      description: await TextEditor.enrichHTML(this.object.system.biodata.description, { async: true }),
+      notes: await TextEditor.enrichHTML(this.object.system.biodata.notes, { async: true }),
       options: this.options,
       owner: this.document.isOwner,
       editScore: this.options.editScore,
       isGM: game.user.isGM,
       config: game.system.warhero.config
-    }    
+    }
     if (this.actor.type == "party") {
       formData.partySlots = this.actor.buildPartySlots()
     } else {
@@ -81,7 +81,7 @@ export class WarheroActorSheet extends ActorSheet {
     // Dynamic patch
     formData.system.secondary.counterspell.hasmax = false
     // Race mngt
-    if ( race && race.name) {
+    if (race && race.name) {
       formData.hpprogression = game.system.warhero.config.progressionList[race.system.hpprogresion]
     }
     this.formData = formData
@@ -97,16 +97,16 @@ export class WarheroActorSheet extends ActorSheet {
 
     // Everything below here is only needed if the sheet is editable
     if (!this.options.editable) return;
-    
-    html.bind("keydown", function(e) { // Ignore Enter in actores sheet
+
+    html.bind("keydown", function (e) { // Ignore Enter in actores sheet
       if (e.keyCode === 13) return false;
-    });  
+    });
 
     // Update Inventory Item
     html.find('.item-edit').click(ev => {
       const li = $(ev.currentTarget).parents(".item")
       let itemId = li.data("item-id")
-      const item = this.actor.items.get( itemId );
+      const item = this.actor.items.get(itemId);
       item.sheet.render(true);
     });
     // Delete Inventory Item
@@ -117,27 +117,27 @@ export class WarheroActorSheet extends ActorSheet {
     html.find('.item-add').click(ev => {
       let dataType = $(ev.currentTarget).data("type")
       let slotKey = $(ev.currentTarget).data("slot")
-      this.actor.createEmbeddedDocuments('Item', [{ name: "NewItem", type: dataType, system: { slotlocation: slotKey} }], { renderSheet: true })
+      this.actor.createEmbeddedDocuments('Item', [{ name: "NewItem", type: dataType, system: { slotlocation: slotKey } }], { renderSheet: true })
     })
-        
+
     html.find('.equip-activate').click(ev => {
       const li = $(ev.currentTarget).parents(".item")
       let itemId = li.data("item-id")
-      this.actor.equipActivate( itemId)
-    });      
+      this.actor.equipActivate(itemId)
+    });
     html.find('.equip-deactivate').click(ev => {
       const li = $(ev.currentTarget).parents(".item")
       let itemId = li.data("item-id")
-      this.actor.equipDeactivate( itemId)
-    });      
+      this.actor.equipDeactivate(itemId)
+    });
 
     html.find('.subactor-edit').click(ev => {
       const li = $(ev.currentTarget).parents(".item");
       let actorId = li.data("actor-id");
-      let actor = game.actors.get( actorId );
+      let actor = game.actors.get(actorId);
       actor.sheet.render(true);
     });
-    
+
     html.find('.subactor-delete').click(ev => {
       const li = $(ev.currentTarget).parents(".item");
       let actorId = li.data("actor-id");
@@ -145,31 +145,31 @@ export class WarheroActorSheet extends ActorSheet {
     });
     html.find('.quantity-minus').click(event => {
       const li = $(event.currentTarget).parents(".item");
-      this.actor.incDecQuantity( li.data("item-id"), -1 );
-    } );
+      this.actor.incDecQuantity(li.data("item-id"), -1);
+    });
     html.find('.quantity-plus').click(event => {
       const li = $(event.currentTarget).parents(".item");
-      this.actor.incDecQuantity( li.data("item-id"), +1 );
-    } );
+      this.actor.incDecQuantity(li.data("item-id"), +1);
+    });
     html.find('.skill-use-minus').click(event => {
       const li = $(event.currentTarget).parents(".item");
-      this.actor.incDecSkillUse( li.data("item-id"), -1 );
-    } );
+      this.actor.incDecSkillUse(li.data("item-id"), -1);
+    });
     html.find('.skill-use-plus').click(event => {
       const li = $(event.currentTarget).parents(".item");
-      this.actor.incDecSkillUse( li.data("item-id"), +1 );
-    } );
-    
+      this.actor.incDecSkillUse(li.data("item-id"), +1);
+    });
+
 
     html.find('.ammo-minus').click(event => {
       const li = $(event.currentTarget).parents(".item")
-      this.actor.incDecAmmo( li.data("item-id"), -1 );
-    } );
+      this.actor.incDecAmmo(li.data("item-id"), -1);
+    });
     html.find('.ammo-plus').click(event => {
       const li = $(event.currentTarget).parents(".item")
-      this.actor.incDecAmmo( li.data("item-id"), +1 )
-    } );
-            
+      this.actor.incDecAmmo(li.data("item-id"), +1)
+    });
+
     html.find('.roll-this').click((event) => {
       const rollType = $(event.currentTarget).data("type")
       const statKey = $(event.currentTarget).data("key")
@@ -189,39 +189,39 @@ export class WarheroActorSheet extends ActorSheet {
       const li = $(event.currentTarget).parents(".item")
       const powerId = li.data("item-id")
       this.actor.rollPower(powerId)
-    });    
+    });
     html.find('.roll-damage').click((event) => {
       const li = $(event.currentTarget).parents(".item")
       const weaponId = li.data("item-id")
       this.actor.rollDamage(weaponId)
-    });    
+    });
     html.find('.roll-damage-2hands').click((event) => {
       const li = $(event.currentTarget).parents(".item")
       const weaponId = li.data("item-id")
       this.actor.rollDamage(weaponId, true)
-    });        
+    });
     html.find('.lock-unlock-sheet').click((event) => {
       this.options.editScore = !this.options.editScore;
       this.render(true);
-    });    
+    });
     html.find('.item-link a').click((event) => {
       const itemId = $(event.currentTarget).data("item-id");
       const item = this.actor.getOwnedItem(itemId);
       item.sheet.render(true);
-    });    
+    });
     html.find('.item-equip').click(ev => {
       const li = $(ev.currentTarget).parents(".item");
-      this.actor.equipItem( li.data("item-id") );
-      this.render(true);      
+      this.actor.equipItem(li.data("item-id"));
+      this.render(true);
     });
 
     html.find('.update-field').change(ev => {
       const fieldName = $(ev.currentTarget).data("field-name");
       let value = Number(ev.currentTarget.value);
-      this.actor.update( { [`${fieldName}`]: value } );
-    });    
+      this.actor.update({ [`${fieldName}`]: value });
+    });
   }
-  
+
   /* -------------------------------------------- */
   /** @override */
   setPosition(options = {}) {
@@ -237,10 +237,10 @@ export class WarheroActorSheet extends ActorSheet {
     console.log(">>>>>> DROPPED!!!!")
     const item = fromUuidSync(dragData.uuid)
     if (item == undefined) {
-      item = this.actor.items.get( item.id )
+      item = this.actor.items.get(item.id)
     }
-    let ret = await this.actor.preprocessItem( event, item, true )
-    if ( ret ) {
+    let ret = await this.actor.preprocessItem(event, item, true)
+    if (ret) {
       super._onDropItem(event, dragData)
     }
   }

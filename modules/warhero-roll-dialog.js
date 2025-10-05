@@ -44,7 +44,7 @@ export class WarheroRollDialog extends Dialog {
 
   /* -------------------------------------------- */
   async refreshDialog() {
-    const content = await renderTemplate("systems/fvtt-warhero/templates/roll-dialog-generic.html", this.rollData)
+    const content = await foundry.applications.handlebars.renderTemplate("systems/fvtt-warhero/templates/roll-dialog-generic.html", this.rollData)
     this.data.content = content
     this.render(true)
   }
@@ -66,6 +66,6 @@ export class WarheroRollDialog extends Dialog {
     })
     html.find('#usemWeaponMalus').change((event) => {
       this.rollData.usemWeaponMalus = event.currentTarget.checked
-    })    
+    })
   }
 }

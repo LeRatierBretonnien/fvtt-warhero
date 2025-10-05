@@ -21,7 +21,7 @@ export const WARHERO_CONFIG = {
     medium:  {parry: "3", label: "WH.conf.mediumshield"},
     tower:  {parry: "5", label: "WH.conf.towershield"},
   },
-  
+
   partySlotNames : {
     storage: {nbslots: 200, itemtype:"equipment", label: "WH.conf.partystorage"}
   },
@@ -62,14 +62,14 @@ export const WARHERO_CONFIG = {
   },
 
   poisonApplication: {
-    touch: "WH.ui.Touch", 
-    ingestion: "WH.ui.Ingestion", 
+    touch: "WH.ui.Touch",
+    ingestion: "WH.ui.Ingestion",
     weapon: "WH.ui.Weapon"
   },
 
   saveType: {
-    halfdmg: "WH.ui.halfdamage", 
-    ignore: "WH.ui.ignoreeffect" 
+    halfdmg: "WH.ui.halfdamage",
+    ignore: "WH.ui.ignoreeffect"
   },
 
   conditionType : {
@@ -87,10 +87,10 @@ export const WARHERO_CONFIG = {
   },
 
   conditionSpecialDuration : {
-    infinite: "WH.ui.infinite", 
+    infinite: "WH.ui.infinite",
     withineor: "WH.uiwithineor",
-    beginr: "WH.ui.beginr", 
-    nextr: "WH.ui.nextr", 
+    beginr: "WH.ui.beginr",
+    nextr: "WH.ui.nextr",
     nextcombat: "WH.ui.nextcombat",
     untilendcombat: "WH.ui.untilendcombat",
     beginturn: "WH.ui.beginturn",
@@ -109,13 +109,13 @@ export const WARHERO_CONFIG = {
     yes:"WH.conf.yes",
     no:"WH.conf.no",
     notapplicable:"WH.conf.notapplicable"
-  }, 
+  },
 
   sizeOptions: {
     small: "WH.ui.small",
     medium: "WH.ui.medium",
     large: "WH.ui.large"
-  }, 
+  },
 
   statValueOptions: {
     "0": "0",
@@ -123,11 +123,11 @@ export const WARHERO_CONFIG = {
     "2": "2",
     "3": "3",
     "4": "4",
-    "5": "5", 
+    "5": "5",
     "6": "6",
-    "7": "7", 
+    "7": "7",
     "8": "8"
-  }, 
+  },
 
   bonusMalusOptions : [
     {value: "-6", label: "-6"},

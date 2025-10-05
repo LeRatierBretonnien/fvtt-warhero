@@ -48,7 +48,7 @@ export class WarheroItemSheet extends ItemSheet {
 
   /* -------------------------------------------- */
   async getData() {
-    
+
     let objectData = foundry.utils.duplicate(this.object.system)
 
     let itemData = objectData
@@ -136,7 +136,7 @@ export class WarheroItemSheet extends ItemSheet {
     });
   }
 
-  
+
 
   /* -------------------------------------------- */
   get template() {

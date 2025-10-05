@@ -14,7 +14,7 @@ export class WarheroUtility {
     /*Hooks.on("dropCanvasData", (canvas, data) => {
       WarheroUtility.dropItemOnToken(canvas, data)
     });
-	*/
+  */
 
     this.rollDataStore = {}
     this.defenderStore = {}
@@ -51,6 +51,11 @@ export class WarheroUtility {
     })
     Handlebars.registerHelper('mul', function (a, b) {
       return parseInt(a) * parseInt(b);
+    })
+    Handlebars.registerHelper('join', function (array, separator) {
+      if (!Array.isArray(array)) return '';
+      if (typeof separator !== 'string') separator = ', ';
+      return array.join(separator);
     })
 
     this.gameSettings()
@@ -167,15 +172,16 @@ export class WarheroUtility {
 
     const templatePaths = [
       'systems/fvtt-warhero/templates/editor-notes-gm.html',
-      'systems/fvtt-warhero/templates/partial-actor-stat-block.html',
-      'systems/fvtt-warhero/templates/partial-actor-status.html',
-      'systems/fvtt-warhero/templates/partial-item-nav.html',
-      'systems/fvtt-warhero/templates/partial-item-description.html',
-      'systems/fvtt-warhero/templates/partial-item-common-equipment.html',
-      'systems/fvtt-warhero/templates/partial-actor-equipment.html',
-      'systems/fvtt-warhero/templates/partial-container.html',
+      'systems/fvtt-warhero/templates/actors/partial-actor-stat-block.hbs',
+      //      'systems/fvtt-warhero/templates/actors/partial-actor-status.hbs',
+      'systems/fvtt-warhero/templates/actors/partial-actor-equipment.hbs',
+      'systems/fvtt-warhero/templates/actors/partial-container.hbs',
+      'systems/fvtt-warhero/templates/items/partial-item-description.hbs',
+      'systems/fvtt-warhero/templates/items/partial-item-equipment-details.hbs',
+      'systems/fvtt-warhero/templates/items/partial-item-common-equipment.hbs',
+      'systems/fvtt-warhero/templates/items/partial-item-shield-details.hbs',
     ]
-    return loadTemplates(templatePaths);
+    return foundry.applications.handlebars.loadTemplates(templatePaths);
   }
 
   /* -------------------------------------------- */
@@ -527,7 +533,7 @@ export class WarheroUtility {
       rollData.diceResult = myRoll.terms[0].results[0].result
 
       let msg = await this.createChatWithRollMode(rollData.alias, {
-        content: await renderTemplate(`systems/fvtt-warhero/templates/chat-generic-result.html`, rollData)
+        content: await foundry.applications.handlebars.renderTemplate(`systems/fvtt-warhero/templates/chat-generic-result.html`, rollData)
       })
       msg.setFlag("world", "rolldata", rollData)
       return
@@ -568,12 +574,12 @@ export class WarheroUtility {
       rollData.isCriticalFailure = true
     }
 
-    if ( rollData.stat.hasuse ) {
+    if (rollData.stat.hasuse) {
       actor.incrementUse(rollData)
     }
 
     let msg = await this.createChatWithRollMode(rollData.alias, {
-      content: await renderTemplate(`systems/fvtt-warhero/templates/chat-generic-result.html`, rollData)
+      content: await foundry.applications.handlebars.renderTemplate(`systems/fvtt-warhero/templates/chat-generic-result.html`, rollData)
     })
     msg.setFlag("world", "rolldata", rollData)
     console.log("Rolldata result", rollData)

@@ -2,18 +2,21 @@
   font-weight: bold;
 }
 
-.tabs .item.active,.blessures-list li ul li:first-child:hover,
+.tabs .item.active,
+.blessures-list li ul li:first-child:hover,
 a:hover {
   text-shadow: 1px 0px 0px #ff6600;
 }
 
-.rollable:hover,.rollable:focus {
+.rollable:hover,
+.rollable:focus {
   /*color: #000;
   text-shadow: 0 0 10px red;*/
   cursor: pointer;
 }
 
-.grid,.grid-2col {
+.grid,
+.grid-2col {
   display: grid;
   grid-column: span 2 / span 2;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -72,7 +75,9 @@ a:hover {
   grid-template-columns: repeat(12, minmax(0, 1fr));
 }
 
-.flex-group-center,.flex-group-left,.flex-group-right {
+.flex-group-center,
+.flex-group-left,
+.flex-group-right {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
@@ -125,8 +130,6 @@ a:hover {
 
 .fvtt-warhero .sheet-header {
   -webkit-box-flex: 0;
-  -ms-flex: 0 0 210px;
-  flex: 0 0 210px;
   overflow: hidden;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -143,6 +146,18 @@ a:hover {
   margin-bottom: 10px;
 }
 
+.fvtt-warhero .sheet-header-actor {
+  min-height: 15rem;
+}
+
+.fvtt-warhero .tab-content-scrollable {
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 5px;
+  flex: 1;
+  min-height: 0;
+}
+
 .fvtt-warhero .sheet-header .profile-img {
   -webkit-box-flex: 0;
   -ms-flex: 0 0 96px;
@@ -155,6 +170,60 @@ a:hover {
   object-fit: cover;
   border-width: 0px;
   object-position: 50% 0;
+}
+
+.item-stat-roll h4 {
+  margin-left: 6px;
+  font-size: 0.9rem;
+}
+
+.item-stat-roll input {
+  min-width: 3rem;
+  max-width: 3rem;
+}
+
+.item-sheet-img {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 96px;
+  flex: 0 0 96px;
+  width: 96px;
+  height: auto;
+  max-height: 96px;
+  margin-top: 0px;
+  margin-right: 10px;
+  object-fit: cover;
+  border-width: 0px;
+  object-position: 50% 0;
+}
+
+.warhero-chat-message-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 4px;
+}
+
+.warhero-chat-message-header .chat-actor-name {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.warhero-chat-message-body {
+  display: flex;
+  margin-top: 4px;
+}
+
+.chat-icon,
+.warhero-chat-message-header .actor-icon,
+.roll-dialog-header .actor-icon {
+  width: 48px;
+  height: auto;
+  max-height: 48px;
+  margin-top: 0px;
+  margin-right: 10px;
+  border-width: 0px;
 }
 
 .button-img {
@@ -205,13 +274,16 @@ a:hover {
   height: 100%;
   margin: 0;
 }
+
 .fvtt-warhero .sheet-tabs {
   -webkit-box-flex: 0;
   -ms-flex: 0;
   flex: 0;
 }
 
-.fvtt-warhero .sheet-body,.fvtt-warhero .sheet-body .tab,.fvtt-warhero .sheet-body .tab .editor {
+.fvtt-warhero .sheet-body,
+.fvtt-warhero .sheet-body .tab,
+.fvtt-warhero .sheet-body .tab .editor {
   height: 100%;
   font-size: 0.8rem;
 }
@@ -332,6 +404,7 @@ a:hover {
 .crit-success {
   color: darkgreen;
 }
+
 .crit-failure {
   color: darkred;
 }
@@ -388,7 +461,7 @@ a:hover {
 .plus-minus-button {
   box-shadow: inset 0px 1px 0px 0px #a6827e;
   /*background: linear-gradient(to bottom, #21374afc 5%, #152833ab 100%);*/
-  background:gray;
+  background: gray;
   /*background-color: #7d5d3b00;*/
   border-radius: 2px;
   border: 1px ridge;
@@ -403,12 +476,15 @@ a:hover {
   margin: 0px;
 }
 
-.river-button:hover,.plus-minus-button:hover,.chat-card-button:hover {
+.river-button:hover,
+.plus-minus-button:hover,
+.chat-card-button:hover {
   background: linear-gradient(to bottom, #800000 5%, #3e0101 100%);
   /*background-color: red;*/
 }
 
-.plus-minus-button:active,.chat-card-button:active {
+.plus-minus-button:active,
+.chat-card-button:active {
   position: relative;
   top: 1px;
 }
