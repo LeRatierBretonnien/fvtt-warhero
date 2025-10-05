@@ -2,10 +2,10 @@
   "id": "fvtt-warhero",
   "title": "Warhero RPG",
   "description": "Warhero RPG system for FoundryVTT",
-  "version": "13.11",
+  "version": "13.20",
   "compatibility": {
-    "minimum": "11",
-    "verified": "13.348"
+    "minimum": "13",
+    "verified": "13"
   },
   "manifest": "https://raw.githubusercontent.com/alexdiste/fvtt-warhero/master/system.json",
   "download": "https://github.com/alexdiste/fvtt-warhero/raw/master/fvtt-13-10.zip",
@@ -40,6 +40,29 @@
   "primaryTokenAttribute": "attributes.hp",
   "secondaryTokenAttribute": "attributes.mana",
   "socket": true,
+    "documentTypes": {
+    "Actor": {
+      "character": { "htmlFields": ["description", "notes", "gmnotes"] }
+    },
+    "Item": {
+      "armor": { "htmlFields": ["description"] },
+      "class": { "htmlFields": ["description"] },
+      "classitem": { "htmlFields": ["description"] },
+      "equipment": { "htmlFields": ["description"] },
+      "weapon": { "htmlFields": ["description"] },
+      "competency": { "htmlFields": ["description"] },
+      "power": { "htmlFields": ["description"] },
+      "language": { "htmlFields": ["description"] },
+      "money": { "htmlFields": ["description"] },
+      "condition": { "htmlFields": ["description"] },
+      "poison": { "htmlFields": ["description"] },
+      "potion": { "htmlFields": ["description"] },
+      "race": { "htmlFields": ["description"] },
+      "shield": { "htmlFields": ["description"] },
+      "skill": { "htmlFields": ["description"] },
+      "trap": { "htmlFields": ["description"] }
+    }
+  },
   "packs": [
     {
       "label": "manuale",

@@ -2,6 +2,7 @@
  * Warhero Shield Data Model
  * Defines the data schema for shield items using Foundry DataModel API
  */
+import { WARHERO_CONFIG } from "../warhero-config.js";
 
 const fields = foundry.data.fields;
 

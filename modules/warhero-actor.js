@@ -1,6 +1,5 @@
 /* -------------------------------------------- */
 import { WarheroUtility } from "./warhero-utility.js";
-import { WarheroRollDialog } from "./warhero-roll-dialog.js";
 
 /* -------------------------------------------- */
 const coverBonusTable = { "nocover": 0, "lightcover": 2, "heavycover": 4, "entrenchedcover": 6 };
@@ -22,8 +21,8 @@ export class WarheroActor extends Actor {
   /**
    * Override the create() function to provide additional SoS functionality.
    *
-   * This overrided create() function adds initial items 
-   * Namely: Basic skills, money, 
+   * This overrided create() function adds initial items
+   * Namely: Basic skills, money,
    *
    * @param {Object} data        Barebones actor data which this function adds onto.
    * @param {Object} options     (Unused) Additional options which customize the creation workflow.
@@ -208,7 +207,7 @@ export class WarheroActor extends Actor {
     for (let slotName in game.system.warhero.config.partySlotNames) {
       let slotDef = game.system.warhero.config.partySlotNames[slotName]
       containers[slotName] = foundry.utils.duplicate(slotDef)
-      containers[slotName].content = this.items.filter(it => (it.type == 'money' || it.type == 'weapon' || it.type == 'armor' || it.type == 'shield' || it.type == 'equipment' || it.type == 'potion' || it.type == 'poison' || it.type == 'trap' || it.type == 'classitem') )
+      containers[slotName].content = this.items.filter(it => (it.type == 'money' || it.type == 'weapon' || it.type == 'armor' || it.type == 'shield' || it.type == 'equipment' || it.type == 'potion' || it.type == 'poison' || it.type == 'trap' || it.type == 'classitem'))
       let slotUsed = 0
       for (let item of containers[slotName].content) {
         let q = (item.system.quantity) ? item.system.quantity : 1
@@ -297,18 +296,18 @@ export class WarheroActor extends Actor {
       weapon.damageFormula2Hands = weapon.system.damage2hands + "+" + Math.floor(this.system.statistics.str.value * 1.5)
     }
     if (weapon.system.weapontype == "throwing" || weapon.system.weapontype == "shooting") {
-      formula += "+"+this.system.secondary.rangeddamagebonus.value
-    } else if ( weapon.system.weapontype != "special" ) { 
-      formula += "+"+this.system.secondary.meleedamagebonus.value
+      formula += "+" + this.system.secondary.rangeddamagebonus.value
+    } else if (weapon.system.weapontype != "special") {
+      formula += "+" + this.system.secondary.meleedamagebonus.value
       if (weapon.damageFormula2Hands) {
-        weapon.damageFormula2Hands += "+"+this.system.secondary.meleedamagebonus.value
+        weapon.damageFormula2Hands += "+" + this.system.secondary.meleedamagebonus.value
       }
     }
     weapon.damageFormula = formula
   }
   /* -------------------------------------------- */
   getEquippedWeapons() {
-    let comp = foundry.utils.duplicate(this.items.filter(item => item.type == 'weapon' && (item.system.slotlocation == "weapon1" || item.system.slotlocation == "weapon2") ) || []);
+    let comp = foundry.utils.duplicate(this.items.filter(item => item.type == 'weapon' && (item.system.slotlocation == "weapon1" || item.system.slotlocation == "weapon2")) || []);
     for (let weapon of comp) {
       this.prepareWeapon(weapon)
     }
@@ -787,6 +786,7 @@ export class WarheroActor extends Actor {
     rollData.mode = rollType
     rollData.statKey = rollKey
     rollData.stat = stat
+    rollData.title = `${this.name} - ${game.i18n.localize(stat.label)}`
     if (stat && stat.stat) {
       rollData.statBonus = foundry.utils.duplicate(this.system.statistics[stat.stat])
     }
@@ -794,6 +794,9 @@ export class WarheroActor extends Actor {
       ui.notifications.warn(game.i18n.localize("WH.notif.toomanyuses"))
       return
     }
+    rollData.usemWeaponMalus = false
+    rollData.mWeaponMalus = this.system.secondary.malusmultiweapon.value
+
     if (rollKey == "parrybonustotal") {
       WarheroUtility.rollParry(rollData)
       return
@@ -806,6 +809,7 @@ export class WarheroActor extends Actor {
     let rollData = this.getCommonRollData()
     rollData.mode = "save"
     rollData.stat = stat
+    rollData.title = `${this.name} - Save`
     this.startRoll(rollData)
   }
 
@@ -825,6 +829,7 @@ export class WarheroActor extends Actor {
       rollData.mWeaponMalus = this.system.secondary.malusmultiweapon.value
       rollData.weapon = weapon
       rollData.img = weapon.img
+      rollData.title = `${this.name} - ${weapon.name}`
       this.startRoll(rollData)
     }
   }
@@ -839,6 +844,7 @@ export class WarheroActor extends Actor {
       rollData.weapon = weapon
       rollData.is2hands = is2hands
       rollData.img = weapon.img
+      rollData.title = `${this.name} - Damage`
       this.startRoll(rollData)
     }
   }
@@ -853,6 +859,7 @@ export class WarheroActor extends Actor {
       rollData.powerLevel = Number(power.system.level)
       rollData.img = power.img
       rollData.hasBM = false
+      rollData.title = `${this.name} - Power`
       this.startRoll(rollData)
     }
   }
@@ -860,7 +867,47 @@ export class WarheroActor extends Actor {
   /* -------------------------------------------- */
   async startRoll(rollData) {
     this.syncRoll(rollData)
-    let rollDialog = await WarheroRollDialog.create(this, rollData)
-    rollDialog.render(true)
+
+    const content = await foundry.applications.handlebars.renderTemplate("systems/fvtt-warhero/templates/roll-dialog-generic.hbs", rollData)
+
+    const rollContext = await foundry.applications.api.DialogV2.wait({
+      window: { title: "Roll window" },
+      position: { width: 420, height: "auto" },
+      classes: ["fvtt-warhero"],
+      content,
+      buttons: [
+        {
+          label: "Roll !",
+          callback: (event, button, dialog) => {
+            const output = Array.from(button.form.elements).reduce((obj, input) => {
+              if (input.name) obj[input.name] = input.value
+              return obj
+            }, {})
+            return output
+          },
+        },
+      ],
+      actions: {
+      },
+      rejectClose: false, // Click on Close button will not launch an error
+      render: (event, dialog) => {
+        $("#powerLevel").change(event => {
+          rollData.powerLevel = event.currentTarget.value
+        })
+        $("#bonusMalus").change(event => {
+          rollData.bonusMalus = Number(event.currentTarget.value)
+        })
+        $("#usemWeaponMalusCheck").change(event => {
+          rollData.usemWeaponMalus = event.currentTarget.checked
+        })
+      }
+    })
+
+    // If the user cancels the dialog, exit
+    if (rollContext === null) return
+
+    rollData = { ...rollData, ...rollContext }
+    WarheroUtility.rollWarhero(rollData)
+
   }
 }

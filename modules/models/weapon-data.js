@@ -3,6 +3,7 @@
  * Defines the data schema for weapon items using Foundry DataModel API
  */
 
+import { WARHERO_CONFIG } from "../warhero-config.js";
 const fields = foundry.data.fields;
 
 /**

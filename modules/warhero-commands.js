@@ -1,10 +1,10 @@
 /* -------------------------------------------- */
 
 import { WarheroUtility } from "./warhero-utility.js";
-import { WarheroRollDialog } from "./warhero-roll-dialog.js";
+import { WarheroRollDialog } from "./__deprecated/warhero-roll-dialog.js";
 
 /* -------------------------------------------- */
-const __saveFirstToKey = { r: "reflex", f: "fortitude", w: "willpower"}
+const __saveFirstToKey = { r: "reflex", f: "fortitude", w: "willpower" }
 
 /* -------------------------------------------- */
 export class WarheroCommands {
@@ -122,12 +122,12 @@ export class WarheroCommands {
   /* -------------------------------------------- */
   static rollSave(msg, params) {
     console.log(msg, params)
-    if ( params.length == 0) {
+    if (params.length == 0) {
       ui.notifications.warn("/rsave command error : syntax is /rsave reflex, /rsave fortitude or /rsave willpower")
       return
     }
     let saveKey = params[0].toLowerCase()
-    if ( saveKey.length > 0 && (saveKey[0] == "r" || saveKey[0] == "f" || saveKey[0] == "w")) {
+    if (saveKey.length > 0 && (saveKey[0] == "r" || saveKey[0] == "f" || saveKey[0] == "w")) {
       const speaker = ChatMessage.getSpeaker()
       let actor
       if (speaker.token) actor = game.actors.tokens[speaker.token]
@@ -135,7 +135,7 @@ export class WarheroCommands {
       if (!actor) {
         return ui.notifications.warn(`Select your actor to run the macro`)
       }
-      actor.rollSave( __saveFirstToKey[saveKey[0]] )  
+      actor.rollSave(__saveFirstToKey[saveKey[0]])
     } else {
       ui.notifications.warn("/rsave syntax error : syntax is /rsave reflex, /rsave fortitude or /rsave willpower")
     }

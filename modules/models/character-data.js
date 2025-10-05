@@ -3,6 +3,7 @@
  * Defines the data schema for character actors using Foundry DataModel API
  */
 
+import { WARHERO_CONFIG } from "../warhero-config.js";
 const fields = foundry.data.fields;
 
 /**
@@ -49,13 +50,7 @@ export class CharacterData extends foundry.abstract.TypeDataModel {
           initial: "medium",
           required: false,
           blank: false,
-          choices: {
-            "tiny": "WH.ui.tiny",
-            "small": "WH.ui.small",
-            "medium": "WH.ui.medium",
-            "large": "WH.ui.large",
-            "huge": "WH.ui.huge"
-          },
+          choices: foundry.utils.duplicate(WARHERO_CONFIG.sizeOptions),
           label: "WH.ui.size",
           hint: "WH.ui.size.hint"
         }),

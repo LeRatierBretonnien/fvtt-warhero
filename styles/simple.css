@@ -20,8 +20,8 @@ a:hover {
   display: grid;
   grid-column: span 2 / span 2;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-  margin: 10px 0;
+  gap: 4px;
+  margin: 2px 0;
   padding: 0;
 }
 
@@ -150,6 +150,24 @@ a:hover {
   min-height: 15rem;
 }
 
+.fvtt-warhero .align-items-start {
+  align-items: flex-start;
+}
+
+.character-equipment h3 {
+  margin: 0;
+  margin-bottom: 4px;
+  font-size: 1.2rem;
+}
+
+/* Assurez-vous que la div-align-top garde son alignement */
+.fvtt-warhero .div-align-top {
+  vertical-align: top;
+  text-align: left;
+  align-self: flex-start;
+  /* Force l'alignement en haut */
+}
+
 .fvtt-warhero .tab-content-scrollable {
   overflow-y: auto;
   overflow-x: hidden;
@@ -170,6 +188,15 @@ a:hover {
   object-fit: cover;
   border-width: 0px;
   object-position: 50% 0;
+}
+
+.equipment-slot-name {
+  min-width: 12rem;
+  max-width: 12rem;
+}
+
+.combat-secondary-values {
+  max-height: 2.5rem;
 }
 
 .item-stat-roll h4 {
@@ -204,6 +231,13 @@ a:hover {
   padding-bottom: 4px;
 }
 
+.item-name-label-header-long h3,
+.item-name-label-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
 .warhero-chat-message-header .chat-actor-name {
   margin: 0;
   font-size: 1.2rem;
@@ -219,6 +253,7 @@ a:hover {
 .warhero-chat-message-header .actor-icon,
 .roll-dialog-header .actor-icon {
   width: 48px;
+  max-width: 48px;
   height: auto;
   max-height: 48px;
   margin-top: 0px;

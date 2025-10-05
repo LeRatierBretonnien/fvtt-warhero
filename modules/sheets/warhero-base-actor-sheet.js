@@ -28,13 +28,15 @@ export default class WarheroActorSheet extends HandlebarsApplicationMixin(foundr
     window: {
       resizable: true,
     },
-    dragDrop: [{ dragSelector: '[data-drag="true"], .rollable', dropSelector: null }],
+    dragDrop: [{ dragSelector: '[data-drag="true"], .rollable, .list-item', dropSelector: null }],
     actions: {
       editImage: WarheroActorSheet.#onEditImage,
       toggleSheet: WarheroActorSheet.#onToggleSheet,
       "item-edit": WarheroActorSheet.#onItemEdit,
       "item-delete": WarheroActorSheet.#onItemDelete,
       "item-add": WarheroActorSheet.#onItemAdd,
+      "quantity-minus": WarheroActorSheet.#onQuantityMinus,
+      "quantity-plus": WarheroActorSheet.#onQuantityPlus,
       toChat: WarheroActorSheet.#toChat,
 
     },
@@ -70,7 +72,6 @@ export default class WarheroActorSheet extends HandlebarsApplicationMixin(foundr
       actor: this.document,
       system: this.document.system,
       source: this.document.toObject(),
-      enrichedBackstory: await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.document.system.backstory, { async: true }),
       isEditMode: this.isEditMode,
       isPlayMode: this.isPlayMode,
       isEditable: this.isEditable,
@@ -81,9 +82,6 @@ export default class WarheroActorSheet extends HandlebarsApplicationMixin(foundr
   /** @override */
   _onRender(context, options) {
     this.#dragDrop.forEach((d) => d.bind(this.element))
-    // Add listeners to rollable elements
-    const rollables = this.element.querySelectorAll(".rollable")
-    rollables.forEach((d) => d.addEventListener("click", this._onRoll.bind(this)))
   }
 
   // #region Drag-and-Drop Workflow
@@ -122,7 +120,7 @@ export default class WarheroActorSheet extends HandlebarsApplicationMixin(foundr
    * @protected
    */
   _canDragStart(selector) {
-    return this.isEditable
+    return true; //this.isEditable
   }
 
   /**
@@ -239,7 +237,7 @@ export default class WarheroActorSheet extends HandlebarsApplicationMixin(foundr
    * @param {HTMLElement} target the capturing HTML element which defined a [data-action]
    */
   static async #onItemDelete(event, target) {
-    const li = $(event.currentTarget).parents(".item")
+    const li = $(target).parents(".item")
     WarheroUtility.confirmDelete(this, li)
   }
 
@@ -248,6 +246,16 @@ export default class WarheroActorSheet extends HandlebarsApplicationMixin(foundr
     const dataType = target.getAttribute("data-type")
     const slotKey = target.getAttribute("data-slot")
     this.actor.createEmbeddedDocuments('Item', [{ name: "NewItem", type: dataType, system: { slotlocation: slotKey } }], { renderSheet: true })
+  }
+
+  static async #onQuantityMinus(event, target) {
+    const li = $(target).parents(".item");
+    this.actor.incDecQuantity(li.data("item-id"), -1);
+  }
+
+  static async #onQuantityPlus(event, target) {
+    const li = $(target).parents(".item");
+    this.actor.incDecQuantity(li.data("item-id"), +1);
   }
   // #endregion
 }

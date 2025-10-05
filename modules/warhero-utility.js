@@ -1,6 +1,7 @@
 /* -------------------------------------------- */
 import { WarheroCombat } from "./warhero-combat.js";
 import { WarheroCommands } from "./warhero-commands.js";
+import { WARHERO_CONFIG } from "./warhero-config.js";
 
 /* -------------------------------------------- */
 
@@ -84,13 +85,8 @@ export class WarheroUtility {
 
   /*--------------------- ----------------------- */
   static getActorStats() {
-    if (foundry.utils.isNewerVersion(game.version, "11")) {
-      return foundry.utils.duplicate(game.model.Actor.character.statistics)
-    } else {
-      return foundry.utils.duplicate(game.system.template.Actor.templates.core.statistics)
-    }
+    return foundry.utils.duplicate(WARHERO_CONFIG.statList)
   }
-
   /*--------------------- ----------------------- */
   static upperFirst(text) {
     if (typeof text !== 'string') return text
@@ -581,7 +577,7 @@ export class WarheroUtility {
     let msg = await this.createChatWithRollMode(rollData.alias, {
       content: await foundry.applications.handlebars.renderTemplate(`systems/fvtt-warhero/templates/chat-generic-result.html`, rollData)
     })
-    msg.setFlag("world", "rolldata", rollData)
+    await msg.setFlag("world", "rolldata", rollData)
     console.log("Rolldata result", rollData)
 
   }

@@ -3,6 +3,7 @@
  * Defines the data schema for trap items using Foundry DataModel API
  */
 
+import { WARHERO_CONFIG } from "../warhero-config.js";
 const fields = foundry.data.fields;
 
 /**

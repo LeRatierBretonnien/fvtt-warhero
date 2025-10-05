@@ -4,6 +4,7 @@
  */
 
 const fields = foundry.data.fields;
+import { WARHERO_CONFIG } from "../warhero-config.js";
 
 /**
  * Data model class for power items

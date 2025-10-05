@@ -123,9 +123,8 @@ export class WarheroCharacterSheet extends WarheroActorSheet {
       secondaryClass: this.actor.getSecondaryClass(),
       totalMoney: this.actor.computeTotalMoney(),
       equipments: foundry.utils.duplicate(this.actor.getEquipmentsOnly()),
-      //moneys: foundry.utils.duplicate(this.actor.getMoneys()),
-      description: await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.document.system.biodata.description, { async: true }),
-      notes: await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.document.system.biodata.notes, { async: true }),
+      enrichedDescription: await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.document.system.biodata.description, { async: true }),
+      enrichedNotes: await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.document.system.biodata.notes, { async: true }),
       options: this.options,
       owner: this.document.isOwner,
       editScore: this.options.editScore,
@@ -143,6 +142,7 @@ export class WarheroCharacterSheet extends WarheroActorSheet {
     // merge context and formData
     Object.assign(context, formData)
 
+    console.log("WarheroCharacterSheet | Context", context)
     return context
   }
 
@@ -168,9 +168,6 @@ export class WarheroCharacterSheet extends WarheroActorSheet {
         break
       case "biography":
         context.tab = context.tabs.biography
-        context.enrichedDescription = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.document.system.description, { async: true })
-        context.enrichedNotes = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.document.system.notes, { async: true })
-        context.enrichedGMNotes = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.document.system.gmnotes, { async: true })
         break
     }
     return context
@@ -266,5 +263,20 @@ export class WarheroCharacterSheet extends WarheroActorSheet {
     const currentEquipped = item.system.equipped || false;
     await item.update({ "system.equipped": !currentEquipped });
   }
+
+
+  async _onDrop(event) {
+    //if (!this.isEditable || !this.isEditMode) return
+    const data = foundry.applications.ux.TextEditor.implementation.getDragEventData(event)
+
+    // Handle different data types
+    if (data.type === "Item") {
+      const item = await fromUuid(data.uuid)
+      return super._onDropItem(item)
+    }
+
+  }
+
+
 
 }

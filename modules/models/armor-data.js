@@ -2,6 +2,7 @@
  * Warhero Armor Data Model
  * Defines the data schema for armor items using Foundry DataModel API
  */
+import { WARHERO_CONFIG } from "../warhero-config.js";
 
 const fields = foundry.data.fields;
 

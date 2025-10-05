@@ -52,6 +52,7 @@
             <span class="item-field-label-medium">
               <label class="short-label">{{localize "WH.ui.Damage"}}</label>
             </span>
+            <div class="item-filler">&nbsp;</div>
           </li>
           {{#each equippedWeapons as |weapon key|}}
           <li class="item flexrow list-item list-item-shadow" data-item-id="{{weapon._id}}">
@@ -85,7 +86,7 @@
         </ul>
       </div>
 
-      <div class="grid grid2col">
+      <div class="grid grid2col combat-secondary-values">
         <ul class="stat-list alternate-list">
           {{#with system.secondary.parrybonus as |stat|}}
           {{> systems/fvtt-warhero/templates/actors/partial-actor-stat-block.hbs stat=stat key="parrybonus"
@@ -113,6 +114,7 @@
             <span class="item-field-label-medium">
               <label class="short-label">{{localize "WH.ui.parrybonus"}}</label>
             </span>
+            <div class="item-filler">&nbsp;</div>
           </li>
           {{#each equippedShields as |shield key|}}
           <li class="item flexrow list-item list-item-shadow" data-item-id="{{shield._id}}">
@@ -134,7 +136,7 @@
         </ul>
       </div>
 
-      <div class="grid grid2col">
+      <div class="grid grid2col combat-secondary-values">
         <ul class="stat-list alternate-list">
           {{#with system.secondary.drbonus as |stat|}}
           {{> systems/fvtt-warhero/templates/actors/partial-actor-stat-block.hbs stat=stat key="drbonus"
@@ -163,6 +165,8 @@
             <span class="item-field-label-medium">
               <label class="short-label">{{localize "WH.ui.damagereduction"}}</label>
             </span>
+            <div class="item-filler">&nbsp;</div>
+
           </li>
           {{#each equippedArmors as |armor key|}}
           <li class="item flexrow list-item list-item-shadow" data-item-id="{{armor._id}}">

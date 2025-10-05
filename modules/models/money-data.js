@@ -2,6 +2,7 @@
  * Warhero Money Data Model
  * Defines the data schema for money items using Foundry DataModel API
  */
+import { WARHERO_CONFIG } from "../warhero-config.js";
 
 const fields = foundry.data.fields;
 

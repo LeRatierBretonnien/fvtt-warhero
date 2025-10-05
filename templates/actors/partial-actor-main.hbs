@@ -1,8 +1,9 @@
 <section class="tab character-{{tab.id}} {{tab.cssClass}}" data-tab="{{tab.id}}" data-group="{{tab.group}}">
   {{!-- Main Tab --}}
   <div>
-    <div class="flexrow">
-      <div class="ability-item">
+    <div class="flexrow align-items-start">
+
+      <div class=" ability-item div-align-top">
         <ul>
           {{#each system.attributes as |attr key|}}
           {{#if (not attr.iscombat)}}
