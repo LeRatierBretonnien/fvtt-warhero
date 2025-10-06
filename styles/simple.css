@@ -236,6 +236,18 @@ a:hover {
   margin: 0;
   font-size: 1.1rem;
   font-weight: bold;
+  min-height: 1.4rem;
+  align-self: center;
+}
+
+.item-name-label-header .items-title-text,
+.item-name-label-header-long .items-title-text {
+  align-self: center;
+  color: black;
+  display: flex;
+  align-items: center;
+  min-height: 1.4rem;
+  margin-left: 4px;
 }
 
 .warhero-chat-message-header .chat-actor-name {
