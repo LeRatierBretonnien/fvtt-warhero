@@ -240,6 +240,15 @@ a:hover {
   align-self: center;
 }
 
+.item-field-label-2rem {
+  text-align: center;
+}
+
+.item-has-use {
+  margin-left: 4px;
+  max-width: 8rem;
+}
+
 .item-name-label-header .items-title-text,
 .item-name-label-header-long .items-title-text {
   align-self: center;

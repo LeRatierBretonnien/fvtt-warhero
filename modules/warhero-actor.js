@@ -576,7 +576,8 @@ export class WarheroActor extends Actor {
   }
   /* -------------------------------------------- */
   async getInitiativeScore(combatId, combatantId) {
-    let roll = new Roll("1d20+" + this.system.attributes.ini.value).roll({ async: false })
+    let roll = new Roll("1d20+" + this.system.attributes.ini.value)
+    await roll.evaluate()
     await WarheroUtility.showDiceSoNice(roll, game.settings.get("core", "rollMode"))
     return roll.total
   }

@@ -20,6 +20,23 @@
   "styles": [
     "styles/simple.css"
   ],
+  "flags": {
+    "hotReload": {
+      "extensions": [
+        "css",
+        "html",
+        "hbs",
+        "json"
+      ],
+      "paths": [
+        "./",
+        "templates",
+        "styles",
+        "lang/en.json",
+        "lang/it.json"
+      ]
+    }
+  },
   "grid": {
     "distance": 1,
     "units": "m"
