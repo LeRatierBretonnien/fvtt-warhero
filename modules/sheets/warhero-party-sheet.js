@@ -1,8 +1,7 @@
 import WarheroActorSheet from "./warhero-base-actor-sheet.js";
-import { WarheroUtility } from "../warhero-utility.js";
 
 /**
- * Warhero Character Sheet Application v2
+ * Warhero Party Sheet Application v2
  * Extends the basic ApplicationV2 with character-specific functionality
  * @extends {foundry.applications.sheets.ActorSheetV2}
  */
@@ -18,12 +17,6 @@ export class WarheroPartySheet extends WarheroActorSheet {
     window: {
     },
     actions: {
-      "roll-this": WarheroPartySheet.#onRollThis,
-      "roll-save": WarheroPartySheet.#onRollSave,
-      "roll-weapon": WarheroPartySheet.#onRollWeapon,
-      "roll-damage": WarheroPartySheet.#onRollDamage,
-      "roll-damage-2hands": WarheroPartySheet.#onRollDamage2Hands,
-      "roll-power": WarheroPartySheet.#onRollPower
     }
   };
 
@@ -82,8 +75,8 @@ export class WarheroPartySheet extends WarheroActorSheet {
       system: objectData,
       totalMoney: this.actor.computeTotalMoney(),
       equipments: foundry.utils.duplicate(this.actor.getEquipmentsOnly()),
-      description: await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.document.system.biodata.description, { async: true }),
-      notes: await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.document.system.biodata.notes, { async: true }),
+      enrichedDescription: await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.document.system.biodata.description, { async: true }),
+      enrichedNotes: await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.document.system.biodata.notes, { async: true }),
       options: this.options,
       owner: this.document.isOwner,
       editScore: this.options.editScore,
@@ -113,97 +106,9 @@ export class WarheroPartySheet extends WarheroActorSheet {
     return context
   }
 
-
-
   /* -------------------------------------------- */
   /*  Event Handlers                             */
   /* -------------------------------------------- */
-
-  /**
-   * Handle rolling a statistic
-   * @param {Event} event - The triggering event
-   * @param {HTMLElement} target - The target element
-   */
-  static async #onRollThis(event, target) {
-    event.preventDefault();
-
-    const rollType = $(event.target).data("type");
-    const statKey = $(event.target).data("key");
-    this.actor.rollFromType(rollType, statKey);
-  }
-
-  /**
-   * Handle rolling a skill
-   * @param {Event} event - The triggering event
-   * @param {HTMLElement} target - The target element
-   */
-  static async #onRollSave(event, target) {
-    event.preventDefault();
-
-    const rollType = $(event.target).data("type")
-    const statKey = $(event.target).data("key")
-    this.actor.rollSaveFromType(rollType, statKey)
-  }
-
-  /**
-   * Handle rolling a weapon attack
-   * @param {Event} event - The triggering event
-   * @param {HTMLElement} target - The target element
-   */
-  static async #onRollWeapon(event, target) {
-    event.preventDefault();
-    const li = $(event.target).parents(".item")
-    const weaponId = li.data("item-id")
-    this.actor.rollWeapon(weaponId)
-  }
-
-  static async #onRollDamage(event, target) {
-    event.preventDefault();
-
-    const li = $(event.target).parents(".item")
-    const weaponId = li.data("item-id")
-    this.actor.rollDamage(weaponId)
-  }
-
-  static async #onRollDamage2Hands(event, target) {
-    event.preventDefault();
-
-    const li = $(event.target).parents(".item")
-    const weaponId = li.data("item-id")
-    this.actor.rollDamage(weaponId, true)
-  }
-
-  /**
-   * Handle casting a power
-   * @param {Event} event - The triggering event
-   * @param {HTMLElement} target - The target element
-   */
-  static async #onRollPower(event, target) {
-    event.preventDefault();
-
-    const li = $(event.target).parents(".item")
-    const powerId = li.data("item-id")
-    this.actor.rollPower(powerId)
-  }
-
-  /**
-   * Handle toggling item equipped status
-   * @param {Event} event - The triggering event
-   * @param {HTMLElement} target - The target element
-   */
-  static async #onToggleEquipped(event, target) {
-    event.preventDefault();
-
-    const itemId = target.closest("[data-item-id]")?.dataset.itemId;
-    if (!itemId) return;
-
-    const item = this.document.items.get(itemId);
-    if (!item) return;
-
-    const currentEquipped = item.system.equipped || false;
-    await item.update({ "system.equipped": !currentEquipped });
-  }
-
 
   async _onDrop(event) {
     //if (!this.isEditable || !this.isEditMode) return

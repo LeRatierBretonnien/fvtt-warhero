@@ -1,4 +1,6 @@
-<section class="tab-content-scrollable tab sheet-body party-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}">
+<section class="tab-content-scrollable tab sheet-body party-{{ tab.id }} {{ tab.cssClass }}"
+  data-group="sheet"
+  data-tab="{{ tab.id }}">
 
 <div>
       {{#each partySlots as |slot slotKey|}}
@@ -49,4 +51,5 @@
       </ul>
       {{/each}}
 </div>
+
 </section>
