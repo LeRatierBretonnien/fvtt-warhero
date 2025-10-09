@@ -100,7 +100,7 @@ Hooks.once("init", async function () {
     makeDefault: true,
     label: "WH.sheet.actorV2"
   });
-  foundry.documents.collections.Actors.registerSheet("fvtt-warhero", WarheroPartySheetV2, {
+  foundry.documents.collections.Actors.registerSheet("fvtt-warhero", WarheroPartySheet, {
     types: ["party"],
     makeDefault: true,
     label: "WH.sheet.partyV2"

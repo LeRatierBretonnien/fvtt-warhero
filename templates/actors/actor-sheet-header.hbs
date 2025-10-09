@@ -21,41 +21,41 @@
               <li class="item flexrow list-item " data-item-id="{{race._id}}">
                 <label class="item-field-label-medium">{{localize "WH.ui.race"}}</label>
                 {{#if race}}
-                <a class="item-edit"><img class="sheet-competence-img" src="{{race.img}}"></a>
+                <a class="item-edit" data-action="item-edit"><img class="sheet-competence-img" src="{{race.img}}"></a>
                 <input type="text" class="item-field-label-medium" disabled value="{{race.name}}" data-dtype="String" />
                 <div class="item-controls item-controls-fixed">
-                  <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                  <a class="item-control item-delete" data-action="item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
                 </div>
                 {{else}}
-                <a class="item-edit"><img class="sheet-competence-img"
+                <a class="item-edit" data-action="item-edit" ><img class="sheet-competence-img"
                     src="systems/fvtt-warhero/images/icons/dwarf-face.svg"></a>
                 {{/if}}
               </li>
               <li class="item flexrow list-item " data-item-id="{{mainClass._id}}">
                 <label class="item-field-label-medium">{{localize "WH.ui.class"}}</label>
                 {{#if mainClass}}
-                <a class="item-edit"><img class="sheet-competence-img" src="{{mainClass.img}}"></a>
+                <a class="item-edit" data-action="item-edit" ><img class="sheet-competence-img" src="{{mainClass.img}}"></a>
                 <input type="text" class="item-field-label-medium" disabled value="{{mainClass.name}}"
                   data-dtype="String" />
                 <div class="item-controls item-controls-fixed">
-                  <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                  <a class="item-control item-delete" data-action="item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
                 </div>
                 {{else}}
-                <a class="item-edit"><img class="sheet-competence-img"
+                <a class="item-edit" data-action="item-edit" ><img class="sheet-competence-img"
                     src="systems/fvtt-warhero/images/icons/elf-helmet.svg"></a>
                 {{/if}}
               </li>
               <li class="item flexrow list-item " data-item-id="{{secondaryClass._id}}">
                 <label class="item-field-label-medium">{{localize "WH.ui.secondaryclass"}}</label>
                 {{#if secondaryClass}}
-                <a class="item-edit"><img class="sheet-competence-img" src="{{secondaryClass.img}}"></a>
+                <a class="item-edit" data-action="item-edit"><img class="sheet-competence-img" src="{{secondaryClass.img}}"></a>
                 <input type="text" class="item-field-label-medium" disabled value="{{secondaryClass.name}}"
                   data-dtype="String" />
                 <div class="item-controls item-controls-fixed">
-                  <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                  <a class="item-control item-delete" data-action="item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
                 </div>
                 {{else}}
-                <a class="item-edit"><img class="sheet-competence-img"
+                <a class="item-edit" data-action="item-edit" ><img class="sheet-competence-img"
                     src="systems/fvtt-warhero/images/icons/elf-helmet.svg"></a>
                 {{/if}}
               </li>

@@ -1,0 +1,18 @@
+<section class="tab tab-content-scrollable sheet-body character-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}"
+    {{!-- Biography Tab --}}
+    <div class="tab biodata" data-group="primary" data-tab="biodata">
+      <hr>
+      <h3>{{localize "WH.ui.background"}} : </h3>
+      <div class="form-group editor">
+        {{editor description target="system.biodata.description" button=true owner=owner
+        editable=editable}}
+      </div>
+      <hr>
+      <h3>{{localize "WH.ui.notes"}} : </h3>
+      <div class="form-group editor">
+        {{editor notes target="system.biodata.notes" button=true owner=owner editable=editable}}
+      </div>
+      <hr>
+      </article>
+  </div>
+</section>

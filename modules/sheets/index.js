@@ -19,3 +19,5 @@ export { WarheroTrapSheetV2 } from "./warhero-trap-sheet.js";
 
 // Warhero Character Sheet
 export { WarheroCharacterSheet } from "./warhero-character-sheet.js";
+// Warhero Party Sheet
+export { WarheroPartySheet } from "./warhero-party-sheet.js";
