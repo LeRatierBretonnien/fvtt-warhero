@@ -1,5 +1,6 @@
-<section class="tab-content-scrollable tab sheet-body character-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}"
+<section class="tab-content-scrollable tab sheet-body party-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}">
 
+<div>
       {{#each partySlots as |slot slotKey|}}
       <ul class="item-list alternate-list">
         <li class="item flexrow list-item items-title-bg {{#if (gt slot.slotUsed slot.nbslots)}}items-title-bg-red{{/if}}">
@@ -20,12 +21,12 @@
           </span>
           <div class="item-filler">&nbsp;</div>
           <div class="item-controls item-controls-fixed">
-            <a class="item-control item-add" data-type="{{itemtype}}" title="Create Item"><i class="fas fa-plus"></i></a>
+            <a class="item-control item-add" data-action="item-add" data-type="{{itemtype}}" title="Create Item"><i class="fas fa-plus"></i></a>
           </div>
         </li>
         {{#each slot.content as |item itemKey|}}
         <li class="item flexrow list-item list-item-shadow" data-item-id="{{item._id}}">
-          <a class="item-edit item-name-img" title="Edit Item"><img class="sheet-competence-img"
+          <a class="item-edit item-name-img" data-action="item-edit" title="Edit Item"><img class="sheet-competence-img"
               src="{{item.img}}" /></a>
           <span class="item-name-label">{{item.name}}</span>
 
@@ -41,11 +42,11 @@
 
           <div class="item-filler">&nbsp;</div>
           <div class="item-controls item-controls-fixed">
-            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+            <a class="item-control item-delete" data-action="item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
           </div>
         </li>
         {{/each}}
       </ul>
       {{/each}}
-
+</div>
 </section>

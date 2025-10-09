@@ -13,7 +13,6 @@ import { WarheroItem } from "./warhero-item.js";
 import { WarheroHotbar } from "./warhero-hotbar.js"
 import { WarheroCommands } from "./warhero-commands.js"
 import { WARHERO_CONFIG } from "./warhero-config.js"
-import { WarheroPartySheetV2 } from "./warhero-party-sheet-v2.js";
 
 // Import Data Models
 import {
@@ -100,7 +99,7 @@ Hooks.once("init", async function () {
     makeDefault: true,
     label: "WH.sheet.actorV2"
   });
-  foundry.documents.collections.Actors.registerSheet("fvtt-warhero", WarheroPartySheet, {
+  foundry.documents.collections.Actors.registerSheet("fvtt-warhero", sheets.WarheroPartySheet, {
     types: ["party"],
     makeDefault: true,
     label: "WH.sheet.partyV2"

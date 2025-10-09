@@ -59,7 +59,8 @@
   "socket": true,
     "documentTypes": {
     "Actor": {
-      "character": { "htmlFields": ["description", "notes", "gmnotes"] }
+      "character": { "htmlFields": ["description", "notes", "gmnotes"] },
+      "party": { "htmlFields": ["description", "notes", "gmnotes"] }
     },
     "Item": {
       "armor": { "htmlFields": ["description"] },

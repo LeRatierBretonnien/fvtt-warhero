@@ -9,7 +9,7 @@ import { WarheroUtility } from "../warhero-utility.js";
 export class WarheroPartySheet extends WarheroActorSheet {
   /** @override */
   static DEFAULT_OPTIONS = {
-    classes: ["character"],
+    classes: ["party"],
     tag: "form",
     position: {
       width: 720,
@@ -69,6 +69,7 @@ export class WarheroPartySheet extends WarheroActorSheet {
     const context = await super._prepareContext()
     context.tabs = this.#getTabs()
     const doc = this.document
+    const objectData = foundry.utils.duplicate(doc.system)
 
     let formData = {
       title: this.title,
@@ -79,11 +80,10 @@ export class WarheroPartySheet extends WarheroActorSheet {
       editable: this.isEditable,
       cssClass: this.isEditable ? "editable" : "locked",
       system: objectData,
-      limited: this.object.limited,
       totalMoney: this.actor.computeTotalMoney(),
       equipments: foundry.utils.duplicate(this.actor.getEquipmentsOnly()),
-      description: await TextEditor.enrichHTML(this.object.system.biodata.description, { async: true }),
-      notes: await TextEditor.enrichHTML(this.object.system.biodata.notes, { async: true }),
+      description: await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.document.system.biodata.description, { async: true }),
+      notes: await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.document.system.biodata.notes, { async: true }),
       options: this.options,
       owner: this.document.isOwner,
       editScore: this.options.editScore,
@@ -103,18 +103,6 @@ export class WarheroPartySheet extends WarheroActorSheet {
     const doc = this.document
     context.systemFields = this.document.system.schema.fields
     switch (partId) {
-      case "stats":
-        context.tab = context.tabs.stats
-        break
-      case "combat":
-        context.tab = context.tabs.combat
-        break;
-      case "skills":
-        context.tab = context.tabs.skills
-        break
-      case "powers":
-        context.tab = context.tabs.powers
-        break
       case "equipment":
         context.tab = context.tabs.equipment
         break
