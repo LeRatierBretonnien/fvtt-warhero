@@ -147,7 +147,7 @@ a:hover {
 }
 
 .fvtt-warhero .sheet-header-actor {
-  min-height: 15rem;
+  min-height: 17rem;
 }
 
 .fvtt-warhero .align-items-start {
@@ -242,6 +242,12 @@ a:hover {
 
 .item-field-label-2rem {
   text-align: center;
+}
+
+.item-field-label-race {
+  text-align: center;
+  min-width: 8rem;
+  max-width: 8rem;
 }
 
 .item-has-use {

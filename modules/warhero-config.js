@@ -118,9 +118,12 @@ export const WARHERO_CONFIG = {
   },
 
   sizeOptions: {
+    tiny: "WH.ui.tiny",
     small: "WH.ui.small",
     medium: "WH.ui.medium",
-    large: "WH.ui.large"
+    large: "WH.ui.large",
+    huge: "WH.ui.huge",
+    gargantuan: "WH.ui.gargantuan"
   },
 
   statValueOptions: {

@@ -25,10 +25,6 @@ export class WarheroActorSheet extends ActorSheet {
   /* -------------------------------------------- */
   async getData() {
 
-    this.actor.setLevel()
-    this.actor.computeDRTotal()
-    this.actor.computeParryBonusTotal()
-    this.actor.computeBonusLanguages()
     const objectData = foundry.utils.duplicate(this.object.system)
     let race = this.actor.getRace()
 

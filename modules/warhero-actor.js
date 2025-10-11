@@ -40,7 +40,9 @@ export class WarheroActor extends Actor {
       let actor = super.create(data, options);
       return actor;
     }
+    data.img = data?.img || "systems/fvtt-warhero/images/icons/cowled.svg";
 
+    // If the created actor is a character, add initial skills from compendium
     if (data.type == 'character') {
       const skills = await WarheroUtility.loadCompendium("fvtt-warhero.skills");
       data.items = skills.map(i => i.toObject())
@@ -69,6 +71,10 @@ export class WarheroActor extends Actor {
 
     if (this.type == 'character' || game.user.isGM) {
       this.computeHitPoints()
+      this.setLevel()
+      this.computeDRTotal()
+      this.computeParryBonusTotal()
+      this.computeBonusLanguages()
     }
 
     super.prepareDerivedData();
@@ -725,7 +731,10 @@ export class WarheroActor extends Actor {
   /* -------------------------------------------- */
   setLevel() {
     let xp = this.system.secondary.xp.value
-    this.system.secondary.xp.level = 1 + Math.floor(xp / 10)
+    let level = 1 + Math.floor(xp / 10)
+    if (level != this.system.secondary.xp.level) {
+      this.update({ 'system.secondary.xp.level': level })
+    }
   }
   /* -------------------------------------------- */
   computeDRTotal() {
@@ -734,7 +743,11 @@ export class WarheroActor extends Actor {
     for (let armor of armors) {
       dr += armor.system.damagereduction
     }
-    this.system.secondary.drbonustotal.value = this.system.secondary.drbonus.value + dr
+    let drbonustotal = this.system.secondary.drbonustotal.value + dr
+    if (drbonustotal < 0) drbonustotal = 0
+    if (drbonustotal != this.system.secondary.drbonustotal.value) {
+      this.update({ 'system.secondary.drbonustotal.value': drbonustotal })
+    }
   }
   /* -------------------------------------------- */
   computeParryBonusTotal() {
@@ -743,11 +756,18 @@ export class WarheroActor extends Actor {
     for (let shield of shields) {
       parry += shield.system.parrybonus
     }
-    this.system.secondary.parrybonustotal.value = this.system.secondary.parrybonus.value + parry
+    let parrybonustotal = this.system.secondary.parrybonustotal.value + parry
+    if (parrybonustotal < 0) parrybonustotal = 0
+    if (parrybonustotal != this.system.secondary.parrybonustotal.value) {
+      this.update({ 'system.secondary.parrybonustotal.value': parrybonustotal })
+    }
   }
   /* -------------------------------------------- */
   computeBonusLanguages() {
-    this.system.secondary.nblanguage.value = Math.floor(this.system.statistics.min.value / 2)
+    let nblanguage = Math.floor(this.system.statistics.min.value / 2)
+    if (nblanguage != this.system.secondary.nblanguage.value) {
+      this.update({ 'system.secondary.nblanguage.value': nblanguage })
+    }
   }
   /* -------------------------------------------- */
   spentMana(spentValue) {

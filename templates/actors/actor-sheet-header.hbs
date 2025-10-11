@@ -22,7 +22,7 @@
                 <label class="item-field-label-medium">{{localize "WH.ui.race"}}</label>
                 {{#if race}}
                 <a class="item-edit" data-action="item-edit"><img class="sheet-competence-img" src="{{race.img}}"></a>
-                <input type="text" class="item-field-label-medium" disabled value="{{race.name}}" data-dtype="String" />
+                <input type="text" class="item-field-label-race" disabled value="{{race.name}}" data-dtype="String" />
                 <div class="item-controls item-controls-fixed">
                   <a class="item-control item-delete" data-action="item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
                 </div>
@@ -35,7 +35,7 @@
                 <label class="item-field-label-medium">{{localize "WH.ui.class"}}</label>
                 {{#if mainClass}}
                 <a class="item-edit" data-action="item-edit" ><img class="sheet-competence-img" src="{{mainClass.img}}"></a>
-                <input type="text" class="item-field-label-medium" disabled value="{{mainClass.name}}"
+                <input type="text" class="item-field-label-race" disabled value="{{mainClass.name}}"
                   data-dtype="String" />
                 <div class="item-controls item-controls-fixed">
                   <a class="item-control item-delete" data-action="item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
@@ -49,7 +49,7 @@
                 <label class="item-field-label-medium">{{localize "WH.ui.secondaryclass"}}</label>
                 {{#if secondaryClass}}
                 <a class="item-edit" data-action="item-edit"><img class="sheet-competence-img" src="{{secondaryClass.img}}"></a>
-                <input type="text" class="item-field-label-medium" disabled value="{{secondaryClass.name}}"
+                <input type="text" class="item-field-label-race" disabled value="{{secondaryClass.name}}"
                   data-dtype="String" />
                 <div class="item-controls item-controls-fixed">
                   <a class="item-control item-delete" data-action="item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>

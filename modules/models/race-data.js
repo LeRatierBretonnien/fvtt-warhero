@@ -27,7 +27,7 @@ export class RaceData extends foundry.abstract.TypeDataModel {
       }),
 
       hpprogresion: new fields.StringField({
-        initial: "hp2",
+        initial: "medium",
         required: false,
         blank: false,
         choices: foundry.utils.duplicate(WARHERO_CONFIG.progressionList),

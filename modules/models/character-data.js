@@ -262,7 +262,8 @@ export class CharacterData extends foundry.abstract.TypeDataModel {
           abbrev: new fields.StringField({ initial: "xp", required: false }),
           islevel: new fields.BooleanField({ initial: true, required: false }),
           style: new fields.StringField({ initial: "edit", required: false }),
-          value: new fields.NumberField({ initial: 0, required: false, integer: true })
+          value: new fields.NumberField({ initial: 0, required: false, integer: true }),
+          level: new fields.NumberField({ initial: 0, required: false, integer: true })
         }),
         malusmultiweapon: new fields.SchemaField({
           label: new fields.StringField({ initial: "WH.ui.malusmultiweapon", required: false }),
